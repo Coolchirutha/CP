@@ -1,3 +1,14 @@
+// #include <bits/stdc++.h>
+
+// using namespace std;
+
+// int main()
+// {
+//   string s;
+//   cin >> s;
+//   cout << regex_replace(s, regex("WUB"), " ");
+// }
+// Previous method is simple but results are inaccurate
 #include <iostream>
 #include <string>
 using namespace std;
