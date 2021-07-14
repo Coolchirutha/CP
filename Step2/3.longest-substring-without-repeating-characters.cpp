@@ -30,6 +30,7 @@ public:
       // Updating the result if necessary.
       result = max(result, i - start);
     }
+    return result;
   }
 };
 // @lc code=end
