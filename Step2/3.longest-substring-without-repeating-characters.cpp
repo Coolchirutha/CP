@@ -9,25 +9,16 @@ using namespace std;
 class Solution {
 public:
   int lengthOfLongestSubstring(string s) {
-    map<char, int> hashMap;
-    // Here result will be the maxLength of the substring, and start will
-    // indicate
-    //  the start of the max length of the substring initially initialized to
-    //  -1.
+    // Assigning all ASCII characters a -1 value.
+    // We initialize a result of 0 and a start of -1.
+    vector<int> hashMap(256, -1);
     int result = 0, start = -1;
     for (int i = 0; i < s.size(); i++) {
-      // If we find the current character already in the hashMap,
-      // we restart the count by resetting the start position of
-      // the substring to the duplicate's index and thereby creating a new
-      // count.
-      if (hashMap.count(s[i]) != 0) {
-        start = max(start, hashMap[s[i]]);
+      // If hashmap[s[i]] is not start, we
+      if (hashMap[s[i]] > start) {
+        start = hashMap[s[i]];
       }
-
-      // Updating the current character's latest location
       hashMap[s[i]] = i;
-
-      // Updating the result if necessary.
       result = max(result, i - start);
     }
     return result;
