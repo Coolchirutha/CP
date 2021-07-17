@@ -6,7 +6,7 @@ After working out the basics and getting familiar with the basics of competitive
 
 All the question numbers are written and some tricky questions I have explained my approach to the problem and also explained the code. In some problems you may find multiple approaches to the same problem.
 
-This repository is to help others as well as for myself when i need to revise some topics or questions in my future. I will try to keep this as updated as possible.
+This repository is to help others as well as for myself when I need to revise some topics or questions in my future. I will try to keep this as updated as possible.
 
 
 ## My setup
