@@ -17,12 +17,9 @@ struct ListNode {
 // @lc code=start
 class Solution {
 public:
-  Solution() {
+  ListNode *reverseKGroup(ListNode *head, int k) {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-  }
-
-  ListNode *reverseKGroup(ListNode *head, int k) {
     if (head == NULL || k == 1)
       return head;
 
@@ -30,11 +27,11 @@ public:
     ListNode *prehead = new ListNode(-1);
     prehead->next = head;
 
-    ListNode *cur = prehead, *next, *prev = prehead;
+    ListNode *prev = prehead, *cur = prev->next, *next = cur->next;
     int count = 0;
 
     // Finding size of LL.
-    while (cur->next) {
+    while (cur) {
       cur = cur->next;
       count++;
     }
