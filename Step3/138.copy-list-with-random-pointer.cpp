@@ -21,20 +21,36 @@ public:
 // @lc code=start
 class Solution {
 public:
+
   Node *copyRandomList(Node *head) {
-    map<Node *, Node *> m;
-    Node *itr = head;
-    while(itr){
-      m[itr] = new Node(itr->val);
-      itr = itr->next;
+    if (head == NULL)
+      return NULL;
+
+    Node *newHead, *l1, *l2;
+    for (l1 = head; l1 != NULL; l1 = l1->next->next) {
+      // Creating a duplicate node at every point and inserting after curNode.
+      l2 = new Node(l1->val);
+      l2->next = l1->next;
+      l1->next = l2;
     }
-    itr = head;
-    while(itr){
-      m[itr]->next = m[itr->next];
-      m[itr]->random = m[itr->random];
-      itr = itr->next;
+
+    newHead = head->next;
+    for (l1 = head; l1 != NULL; l1 = l1->next->next) {
+      // Here we are replacing the random of the new list with the address of
+      // newly created random i.e. cur->random->next.
+      if (l1->random != NULL)
+        l1->next->random = l1->random->next;
     }
-    return m[head];
+
+    for (l1 = head; l1 != NULL; l1 = l1->next) {
+      // Breaking up the list and returning new List.
+      l2 = l1->next;
+      l1->next = l2->next;
+      if (l2->next != NULL)
+        l2->next = l2->next->next;
+    }
+
+    return newHead;
   }
 };
 // @lc code=end
