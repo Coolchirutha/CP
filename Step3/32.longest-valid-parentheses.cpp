@@ -20,6 +20,8 @@ public:
       } else {
         stk.pop();
         if (stk.empty()) {
+          // After the scan is done, the stack will only contain the indices of
+          // characters which cannot be matched.
           stk.push(i);
         } else {
           result = max(result, i - stk.top());
