@@ -1,0 +1,39 @@
+/*
+ * @lc app=leetcode id=1339 lang=cpp
+ *
+ * [1339] Maximum Product of Splitted Binary Tree
+ */
+#include <bits/stdc++.h>
+using namespace std;
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right)
+      : val(x), left(left), right(right) {}
+};
+
+// @lc code=start
+class Solution {
+public:
+  Solution() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+  }
+  long res = 0, total = 0, sub;
+  int maxProduct(TreeNode *root) {
+    total = s(root), s(root);
+    return res % (int)(1e9 + 7);
+  }
+
+  int s(TreeNode *root) {
+    if (!root)
+      return 0;
+    sub = root->val + s(root->left) + s(root->right);
+    res = max(res, sub * (total - sub));
+    return sub;
+  }
+};
+// @lc code=end
