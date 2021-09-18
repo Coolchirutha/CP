@@ -17,26 +17,29 @@ struct TreeNode {
 // @lc code=start
 class Solution {
 private:
-  void findPaths(TreeNode *node, int target, vector<int> &path,
+  void findPaths(TreeNode *curNode, int target, vector<int> &curPath,
                  vector<vector<int>> &result) {
-    if (!node)
+    if (!curNode)
       return;
-    path.push_back(node->val);
-    if (node->val == target && !node->right && !node->left) {
-      result.push_back(path);
+
+    curPath.push_back(curNode->val);
+
+    if (target == curNode->val && !curNode->left && !curNode->right) {
+      result.push_back(curPath);
     }
-    findPaths(node->left, target - node->val, path, result);
-    findPaths(node->right, target - node->val, path, result);
-    path.pop_back();
+
+    findPaths(curNode->left, target - curNode->val, curPath, result);
+    findPaths(curNode->right, target - curNode->val, curPath, result);
+    curPath.pop_back();
   }
 
 public:
   vector<vector<int>> pathSum(TreeNode *root, int target) {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     vector<vector<int>> result;
-    vector<int> path;
-    findPaths(root, target, path, result);
+    if (!root)
+      return result;
+    vector<int> curPath;
+    findPaths(root, target, curPath, result);
     return result;
   }
 };
