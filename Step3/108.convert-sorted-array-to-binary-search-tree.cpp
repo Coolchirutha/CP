@@ -18,21 +18,29 @@ struct TreeNode {
 
 // @lc code=start
 class Solution {
-  TreeNode *sortedArrayToBST(vector<int> &nums, int start, int end) {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    if (end <= start)
-      return NULL;
-    int mid = (end + start) / 2;
-    TreeNode *root = new TreeNode(nums[mid]);
-    root->left = sortedArrayToBST(nums, start, mid);
-    root->right = sortedArrayToBST(nums, mid + 1, end);
-    return root;
-  }
-
 public:
+  TreeNode *construct(vector<int> nums, int left, int right) {
+    if (left > right)
+      return NULL;
+    TreeNode *newNode = new TreeNode();
+    if (left == right) {
+      newNode->val = nums[left];
+      newNode->left = NULL;
+      newNode->right = NULL;
+    } else {
+      // This is same as left + right / 2 but it prevents overflow.
+      int mid = left + (right - left) / 2;
+      newNode->val = nums[mid];
+      newNode->left = construct(nums, left, mid - 1);
+      newNode->right = construct(nums, mid + 1, right);
+    }
+    return newNode;
+  }
   TreeNode *sortedArrayToBST(vector<int> &nums) {
-    return sortedArrayToBST(nums, 0, nums.size());
+    if (nums.size() == 0) {
+      return NULL;
+    }
+    return construct(nums, 0, nums.size() - 1);
   }
 };
 // @lc code=end
